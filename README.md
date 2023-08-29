@@ -2,8 +2,8 @@
 
 Team:
 
-* Person 1 - Which microservice?
-* Person 2 - Which microservice?
+* Emily Yim - Hats
+* Brian La - Shoes
 
 ## Design
 
