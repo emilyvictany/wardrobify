@@ -10,6 +10,9 @@ sys.path.append("")
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "hats_project.settings")
 django.setup()
 
+# Import models from hats_rest, here.
+# from hats_rest.models import Something
+from hats_rest.models import LocationVO
 
 from hats_rest.models import LocationVO
 

@@ -21,4 +21,4 @@ class Shoes(models.Model):
     )
 
     def get_api_url(self):
-        return reverse("shoe_details", kwargs={"id": self.id})
+        return reverse("shoe_details", kwargs={"pk": self.pk})

@@ -75,12 +75,18 @@ def api_hats_list(request):
 @require_http_methods(["GET", "DELETE"])
 def api_hat_detail(request, id):
     if request.method == "GET":
-        hat = Hat.objects.get(id=id)
-        return JsonResponse(
-            hat,
-            encoder=HatDetailEncoder,
-            safe=False
-        )
+        try:
+            location = Hat.objects.get(id=id)
+            print(location)
+            return JsonResponse(
+                location,
+                encoder=HatDetailEncoder,
+                safe=False
+            )
+        except LocationVO.DoesNotExist:
+            response = JsonResponse({"message": "Does not exist"})
+            response.status_code = 404
+            return response
     elif request.method == "DELETE":
         count, _ = Hat.objects.filter(id=id).delete()
         return JsonResponse({"deleted": count > 0})
