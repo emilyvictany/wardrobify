@@ -6,6 +6,7 @@ import json
 from common.json import ModelEncoder
 from .models import Hat, LocationVO
 
+
 class LocationVOEncoder(ModelEncoder):
     model = LocationVO
     properties = [

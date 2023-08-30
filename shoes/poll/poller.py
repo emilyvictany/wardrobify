@@ -12,17 +12,18 @@ django.setup()
 # Import models from hats_rest, here.
 from shoes_rest.models import BinVO
 
+
 def get_bins():
     url = "http://wardrobe-api:8000/api/bins/"
     response = requests.get(url)
-    print("THIS IS THE RESPONSE: ", response)
+    # print("THIS IS THE RESPONSE: ", response)
     content = json.loads(response.content)
     for bin in content["bins"]:
         BinVO.objects.update_or_create(
-            import_href = bin["href"],
-            bin_size = bin["bin_size"],
-            number = bin["bin_number"],
-            closet_name = bin["closet_name"]
+            import_href=bin["href"],
+            bin_size=bin["bin_size"],
+            number=bin["bin_number"],
+            closet_name=bin["closet_name"]
         )
 
 def poll():
