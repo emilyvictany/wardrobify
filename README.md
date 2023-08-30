@@ -2,8 +2,8 @@
 
 Team:
 
-* Emily - Hats
-* Brian - Shoes
+* Emily Yim - Hats
+* Brian La - Shoes
 
 ## Design
 
