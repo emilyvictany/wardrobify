@@ -178,6 +178,7 @@ def api_bins(request):
     }
     """
     if request.method == "GET":
+        print(Bin.objects.all())
         bin = Bin.objects.all()
         return JsonResponse(
             {"bins": bin},
