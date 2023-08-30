@@ -14,6 +14,10 @@ django.setup()
 # from hats_rest.models import Something
 from hats_rest.models import LocationVO
 
+from hats_rest.models import LocationVO
+
+
+# Import models from hats_rest, here.
 def get_hats():
     response = requests.get("http://wardrobe-api:8000/api/locations/")
     content = json.loads(response.content)
@@ -33,7 +37,6 @@ def poll():
         print('Hats poller polling for data')
         try:
             get_hats()
-            pass
         except Exception as e:
             print(e, file=sys.stderr)
         time.sleep(60)

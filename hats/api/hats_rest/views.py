@@ -6,6 +6,7 @@ import json
 from common.json import ModelEncoder
 from .models import Hat, LocationVO
 
+
 class LocationVOEncoder(ModelEncoder):
     model = LocationVO
     properties = [
@@ -71,7 +72,7 @@ def api_hats_list(request):
         )
 
 
-@require_http_methods(["DELETE", "GET", "PUT"])
+@require_http_methods(["GET", "DELETE"])
 def api_hat_detail(request, id):
     if request.method == "GET":
         try:
@@ -87,32 +88,5 @@ def api_hat_detail(request, id):
             response.status_code = 404
             return response
     elif request.method == "DELETE":
-        try:
-            location = Hat.objects.get(id=id)
-            location.delete()
-            return JsonResponse(
-                location,
-                encoder=HatDetailEncoder,
-                safe=False
-            )
-        except LocationVO.DoesNotExist:
-            response = JsonResponse({"message": "Does not exist"})
-    else:  # PUT
-        try:
-            content = json.loads(request.body)
-            location = Hat.objects.get(id=id)
-
-            props = ["closet_name"]
-            for prop in props:
-                if prop in content:
-                    setattr(location, prop, content[prop])
-            location.save()
-            return JsonResponse(
-                location,
-                encoder=HatDetailEncoder,
-                safe=False
-            )
-        except LocationVO.DoesNotExist:
-            response = JsonResponse({"message": "Does not exist"})
-            response.status_code = 404
-            return response
+        count, _ = Hat.objects.filter(id=id).delete()
+        return JsonResponse({"deleted": count > 0})
