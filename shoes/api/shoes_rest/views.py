@@ -8,7 +8,7 @@ from .models import BinVO, Shoes
 
 class BinVOEncoder(ModelEncoder):
     model = BinVO
-    properties = ["number", "import_href"]
+    properties = ["number", "import_href", "closet_name", "bin_size"]
 
 class ShoesListEncoder(ModelEncoder):
     model = Shoes
@@ -16,7 +16,7 @@ class ShoesListEncoder(ModelEncoder):
 
 class ShoeDetailEncoder(ModelEncoder):
     model = Shoes
-    properties = ["manufacturer", "model_name", "color", "picture_url"]
+    properties = ["manufacturer", "model_name", "color", "picture_url", "bin"]
     encoders = {"bin": BinVOEncoder()}
 
 # Create your views here.
@@ -50,3 +50,27 @@ def api_list_shoes(request, bin_vo_id=None):
             encoder = ShoeDetailEncoder,
             safe = False
         )
+
+@require_http_methods(["GET", "PUT", "DELETE"])
+def api_shoe_detail(request, pk):
+    if request.method == "GET":
+        shoe = Shoes.objects.get(id=pk)
+        return JsonResponse(
+            shoe,
+            encoder=ShoeDetailEncoder,
+            safe=False
+        )
+    elif request.method =="DELETE":
+        count, _ = Shoes.objects.filter(id=pk).delete()
+        return JsonResponse({"deleted": count > 0})
+    # else:
+    #     content = json.loads(request.body)
+    #     try:
+    #         if "bin" in content:
+    #             bin = Shoes.objects.get(id=content["bin"])
+    #             content["bin"] = bin
+        # except Shoes.DoesNotExist:
+        #     return JsonResponse(
+        #         {"message": "Invalid BinVO href"},
+        #         status=400
+        #     )

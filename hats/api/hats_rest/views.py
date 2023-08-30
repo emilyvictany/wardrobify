@@ -76,6 +76,7 @@ def api_hat_detail(request, id):
     if request.method == "GET":
         try:
             location = Hat.objects.get(id=id)
+            print(location)
             return JsonResponse(
                 location,
                 encoder=HatDetailEncoder,
