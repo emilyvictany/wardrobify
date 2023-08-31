@@ -21,6 +21,8 @@ class HatListEncoder(ModelEncoder):
     model = Hat
     properties = [
         "id",
+        "color",
+        "fabric",
         "style",
         "picture_url",
     ]
