@@ -30,7 +30,7 @@ const ShoeList = (props) => {
 
     useEffect(() => {
         fetchData();
-      }, []);
+    }, []);
     // console.log(shoes[1].href)
 
     const handleDelete = async (href) => {
@@ -68,9 +68,9 @@ const ShoeList = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                  {shoes.map(shoe => {
-                  return (
-                      <tr key = { shoe.href }>
+                    {shoes.map(shoe => {
+                    return (
+                        <tr key = { shoe.href }>
                     <td><img src={ shoe.picture_url } /></td>
                     <td>{ shoe.manufacturer }</td>
                     <td>{ shoe.model_name }</td>
@@ -80,8 +80,8 @@ const ShoeList = (props) => {
                     <td>
                         <button className='delete' type='button' onClick={() => handleDelete(shoe.href)}> Delete </button>
                     </td>
-                  </tr>
-                  );
+                    </tr>
+                    );
                 })}
                 </tbody>
             </table>
