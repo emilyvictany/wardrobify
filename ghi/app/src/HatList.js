@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import "./index.css"
+import { NavLink } from 'react-router-dom';
+
 
 function HatList() {
     const [hats, setHats] = useState ([])
@@ -18,6 +20,8 @@ function HatList() {
     }, [])
 
     return (
+        <div>
+            <NavLink className="nav-link" to="/hats/new">Add a hat! ♡</NavLink>
         <table className="table table-striped">
         <thead>
             <tr>
@@ -42,6 +46,7 @@ function HatList() {
             })}
         </tbody>
         </table>
+        </div>
     )
 }
 export default HatList
