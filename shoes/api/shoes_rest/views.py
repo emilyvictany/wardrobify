@@ -12,7 +12,8 @@ class BinVOEncoder(ModelEncoder):
 
 class ShoesListEncoder(ModelEncoder):
     model = Shoes
-    properties = ["manufacturer", "model_name"]
+    properties = ["manufacturer", "model_name", "color", "picture_url", "bin"]
+    encoders = {"bin": BinVOEncoder()}
 
 class ShoeDetailEncoder(ModelEncoder):
     model = Shoes
@@ -26,7 +27,7 @@ def api_list_shoes(request, bin_vo_id=None):
         if bin_vo_id == None:
             shoes = Shoes.objects.all()
         else:
-            print("THIS IS BINVO DATA:", BinVO.objects.all())
+            # print("THIS IS BINVO DATA:", BinVO.objects.all())
             shoes = Shoes.objects.filter(bin=bin_vo_id)
         return JsonResponse(
             {"shoes" : shoes},
@@ -34,13 +35,13 @@ def api_list_shoes(request, bin_vo_id=None):
         )
     else:
         content = json.loads(request.body)
-        print("THIS IS THE CONTENT: ", content)
+        # print("THIS IS THE CONTENT: ", content)
         try:
             bin_href = content['bin']
-            print("THIS IS THE BIN HREF: ", bin_href, type(bin_href))
-            print("THIS IS BINVO DATA:", BinVO.objects.all())
+            # print("THIS IS THE BIN HREF: ", bin_href, type(bin_href))
+            # print("THIS IS BINVO DATA:", BinVO.objects.all())
             bin = BinVO.objects.get(import_href = bin_href)
-            print("THIS IS THE BIN VO: ", bin)
+            # print("THIS IS THE BIN VO: ", bin)
             content["bin"] = bin
         except BinVO.DoesNotExist:
             return JsonResponse({"message": "Invalid bin id"}, status = 400)
