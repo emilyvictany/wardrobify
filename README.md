@@ -1,4 +1,5 @@
 # Wardrobify
+
 Wardrobify is a web-based application that allows people with large and many closets to organize their hats and shoes.
 
 A starter project to practice RESTful API creation in microservices and a React front-end to interact with them.
@@ -13,7 +14,7 @@ A starter project to practice RESTful API creation in microservices and a React 
 
 ## Shoes microservice
 
-<img src="https://i.pinimg.com/originals/ba/5d/d4/ba5dd445504b80df283e90ebadb57d0b.gif" alt="hats" width="300" height="300"/>
+<img src="https://i.pinimg.com/originals/ce/fa/b3/cefab3c5e543d02e2077dbae41e81c37.gif" alt="shoes" width="350" height="300"/>
 
 The Shoes microservice will poll data from the wardrobe_api Bin Model. It will then use that data to create a BinVO model to allow us to locate where the shoe is placed in which bin and which closet.
 ##### Models:
@@ -32,7 +33,19 @@ For backend, created a Hat model and LocationVO model with relevant attributes (
 
 
 ## Getting Started
-* fork repo
-* clone repo
+*for this project we used git, Docker, and Insomnia*
+* Fork from repository at https://gitlab.com/emilyvictany/wardrobify
+* Clone with `git clone` to your local computer
+    * Use HTTPS if SSH has not been set up
+    * after cloning, we used `code .` to open project in **VS Code**
+
+* Run the following commands in **Docker** terminal on your computer:
+    1. `docker volume create two-shot-pgdata`
+    2. `docker-compose build`
+    3. `docker-compose up`
+note: when you run `docker-compose up` and if you're on macOS, you'll see a warning about an environment variable named OS being missing. *You can safely ignore this.*
+---
+
+(need to map out CRUD)
 * set up insomnia to make requests to wardrobe API (locations and bins)
     * create, get all, get one, delete one, update one
